@@ -1,0 +1,1310 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/admin/banner/list": {
+      "get": {
+        "operationId": "BannerController_getList",
+        "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pic",
+            "required": false,
+            "in": "query",
+            "description": "图片地址",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "名称",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url",
+            "required": false,
+            "in": "query",
+            "description": "跳转地址",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tag",
+            "required": false,
+            "in": "query",
+            "description": "banner标识，用于推荐",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "allOf": [
+                            {
+                              "allOf": [
+                                {
+                                  "$ref": "#/components/schemas/PaginatedDto"
+                                },
+                                {
+                                  "properties": {
+                                    "datalist": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "#/components/schemas/BannerDto"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Banner管理"
+        ]
+      }
+    },
+    "/admin/banner/add": {
+      "post": {
+        "operationId": "BannerController_addBanner",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBannerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {}
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Banner管理"
+        ]
+      }
+    },
+    "/admin/banner/remove": {
+      "delete": {
+        "operationId": "BannerController_removeBanner",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {}
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Banner管理"
+        ]
+      }
+    },
+    "/admin/banner/update": {
+      "post": {
+        "operationId": "BannerController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BannerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {}
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Banner管理"
+        ]
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "operationId": "LoginController_login",
+        "summary": "登录",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "系统登录模块"
+        ]
+      }
+    },
+    "/admin/logout": {
+      "post": {
+        "operationId": "LoginController_logout",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "系统登录模块"
+        ]
+      }
+    },
+    "/admin/sys_goods/list": {
+      "get": {
+        "operationId": "SysGoodsController_list",
+        "parameters": [
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "allOf": [
+                            {
+                              "allOf": [
+                                {
+                                  "$ref": "#/components/schemas/PaginatedDto"
+                                },
+                                {
+                                  "properties": {
+                                    "datalist": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "#/components/schemas/GoodsDto"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "系统商品"
+        ]
+      }
+    },
+    "/admin/sys_goods/remove": {
+      "delete": {
+        "operationId": "SysGoodsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {}
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "系统商品"
+        ]
+      }
+    },
+    "/admin/sys_goods/add": {
+      "post": {
+        "operationId": "SysGoodsController_add",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysGoodsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {}
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "系统商品"
+        ]
+      }
+    },
+    "/admin/sys_goods/update": {
+      "post": {
+        "operationId": "SysGoodsController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysGoodsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {}
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "系统商品"
+        ]
+      }
+    },
+    "/admin/user/list": {
+      "get": {
+        "operationId": "UserController_getList",
+        "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "account",
+            "required": false,
+            "in": "query",
+            "description": "账号",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "required": false,
+            "in": "query",
+            "description": "密码",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "username",
+            "required": false,
+            "in": "query",
+            "description": "用户昵称",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rules",
+            "required": false,
+            "in": "query",
+            "description": "角色",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "required": false,
+            "in": "query",
+            "description": "token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "createTime",
+            "required": false,
+            "in": "query",
+            "description": "创建时间",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "allOf": [
+                            {
+                              "allOf": [
+                                {
+                                  "$ref": "#/components/schemas/PaginatedDto"
+                                },
+                                {
+                                  "properties": {
+                                    "datalist": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "#/components/schemas/UserDto"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "系统用户管理"
+        ]
+      }
+    },
+    "/admin/user_goods/list": {
+      "get": {
+        "operationId": "UserGoodsController_list",
+        "parameters": [
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "用户商品"
+        ]
+      }
+    },
+    "/file/upload": {
+      "post": {
+        "operationId": "UploadController_uploadFile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Campus-Admin",
+    "description": "The Campus Server API description for manager system",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "BannerDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pic": {
+            "type": "string",
+            "description": "图片地址"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "url": {
+            "type": "string",
+            "description": "跳转地址"
+          },
+          "tag": {
+            "type": "string",
+            "description": "banner标识，用于推荐"
+          }
+        }
+      },
+      "AddBannerDto": {
+        "type": "object",
+        "properties": {
+          "pic": {
+            "type": "string",
+            "description": "图片地址"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "url": {
+            "type": "string",
+            "description": "跳转地址"
+          },
+          "tag": {
+            "type": "string",
+            "description": "banner标识，用于推荐"
+          }
+        }
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account",
+          "password"
+        ]
+      },
+      "PaginatedDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "pageNum": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "datalist": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "pageNum",
+          "pageSize",
+          "datalist"
+        ]
+      },
+      "BaseResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "msg"
+        ]
+      },
+      "UserEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "openid": {
+            "type": "string",
+            "description": "用户openid"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "sex": {
+            "type": "object",
+            "description": "性别"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "头像"
+          },
+          "nickname": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "school": {
+            "type": "string",
+            "description": "学校"
+          },
+          "major": {
+            "type": "string",
+            "description": "专业"
+          },
+          "startYear": {
+            "type": "string",
+            "description": "入学年份"
+          },
+          "endYear": {
+            "type": "string",
+            "description": "毕业年份"
+          },
+          "faculty": {
+            "type": "string",
+            "description": "院校"
+          },
+          "_class": {
+            "type": "string",
+            "description": "班级"
+          },
+          "token": {
+            "type": "string",
+            "description": "token"
+          },
+          "custom_permission": {
+            "type": "string"
+          },
+          "sid": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string",
+            "description": "省份"
+          },
+          "city": {
+            "type": "string",
+            "description": "城市"
+          },
+          "birthday": {
+            "type": "number",
+            "description": "出生日期"
+          },
+          "from": {
+            "type": "string",
+            "description": "来源"
+          },
+          "from_id": {
+            "type": "string"
+          },
+          "real_name": {
+            "type": "string",
+            "description": "真实姓名"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "product_comments": {
+            "description": "商品评价",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsCommentEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "openid",
+          "username",
+          "sex",
+          "avatar",
+          "nickname",
+          "school",
+          "major",
+          "startYear",
+          "endYear",
+          "faculty",
+          "_class",
+          "token",
+          "custom_permission",
+          "sid",
+          "province",
+          "city",
+          "birthday",
+          "from",
+          "from_id",
+          "real_name",
+          "password"
+        ]
+      },
+      "GoodsTypeEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "分类名称"
+          },
+          "parent": {
+            "description": "父级分类",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsTypeEntity"
+              }
+            ]
+          },
+          "icon": {
+            "type": "string",
+            "description": "分类图标"
+          },
+          "children": {
+            "description": "子分类",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsTypeEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "parent",
+          "children"
+        ]
+      },
+      "GoodsEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "desc": {
+            "type": "string",
+            "description": "商品描述"
+          },
+          "pictures": {
+            "type": "string",
+            "description": "商品图片"
+          },
+          "start_price": {
+            "type": "number",
+            "description": "商品起步价"
+          },
+          "sale": {
+            "type": "number",
+            "description": "商品销量"
+          },
+          "comments": {
+            "description": "商品评价",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsCommentEntity"
+            }
+          },
+          "type": {
+            "description": "商品分类",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsTypeEntity"
+              }
+            ]
+          },
+          "sale_status": {
+            "type": "number",
+            "description": "上下架状态，1上架，0下架"
+          },
+          "details": {
+            "type": "string",
+            "description": "商品详情"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "desc",
+          "pictures",
+          "start_price",
+          "sale",
+          "comments",
+          "type",
+          "sale_status",
+          "details"
+        ]
+      },
+      "GoodsCommentEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string",
+            "description": "评价内容"
+          },
+          "time": {
+            "type": "string",
+            "description": "评价时间"
+          },
+          "user": {
+            "description": "评价用户",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserEntity"
+              }
+            ]
+          },
+          "replies": {
+            "description": "回复",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsCommentEntity"
+            }
+          },
+          "parent": {
+            "description": "被回复",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsCommentEntity"
+              }
+            ]
+          },
+          "star": {
+            "type": "number",
+            "description": "点赞数"
+          },
+          "goods": {
+            "description": "对应商品",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsEntity"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "comment",
+          "user",
+          "star",
+          "goods"
+        ]
+      },
+      "GoodsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "desc": {
+            "type": "string",
+            "description": "商品描述"
+          },
+          "pictures": {
+            "type": "string",
+            "description": "商品图片"
+          },
+          "start_price": {
+            "type": "number",
+            "description": "商品起步价"
+          },
+          "sale": {
+            "type": "number",
+            "description": "商品销量"
+          },
+          "comments": {
+            "description": "商品评价",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsCommentEntity"
+            }
+          },
+          "type": {
+            "description": "商品分类",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsTypeEntity"
+              }
+            ]
+          },
+          "sale_status": {
+            "type": "number",
+            "description": "上下架状态，1上架，0下架"
+          },
+          "details": {
+            "type": "string",
+            "description": "商品详情"
+          }
+        }
+      },
+      "SkuTempEntity": {
+        "type": "object",
+        "properties": {}
+      },
+      "SkuAttrClassEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "description": "sku分类名称"
+          },
+          "attrs": {
+            "description": "sku属性",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkuAttrEntity"
+            }
+          },
+          "temp": {
+            "description": "sku模板",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SkuTempEntity"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "attrs",
+          "temp"
+        ]
+      },
+      "SkuAttrEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "value": {
+            "type": "string",
+            "description": "sku属性值"
+          },
+          "attr_class": {
+            "description": "sku属性分类id",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SkuAttrClassEntity"
+              }
+            ]
+          },
+          "sku": {
+            "description": "sku",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkuEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "value",
+          "attr_class",
+          "sku"
+        ]
+      },
+      "SysGoodsEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "good_info": {
+            "description": "商品信息",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsEntity"
+              }
+            ]
+          },
+          "skus": {
+            "description": "sku的id",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkuEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "good_info",
+          "skus"
+        ]
+      },
+      "SkuEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "attrs": {
+            "description": "sku属性id",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkuAttrEntity"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "sku名字"
+          },
+          "stockQuantity": {
+            "type": "number",
+            "description": "库存"
+          },
+          "price": {
+            "type": "number",
+            "description": "商品现价"
+          },
+          "original_price": {
+            "type": "number",
+            "description": "商品原价"
+          },
+          "goods": {
+            "description": "商品",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SysGoodsEntity"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "attrs",
+          "name",
+          "stockQuantity",
+          "price",
+          "original_price",
+          "goods"
+        ]
+      },
+      "SysGoodsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "good_info": {
+            "description": "商品信息",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoodsEntity"
+              }
+            ]
+          },
+          "skus": {
+            "description": "sku的id",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkuEntity"
+            }
+          }
+        }
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string",
+            "description": "账号"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "rules": {
+            "type": "string",
+            "description": "角色"
+          },
+          "token": {
+            "type": "string",
+            "description": "token"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "app api",
+    "url": "http://localhost:3000/api"
+  }
+}
