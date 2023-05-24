@@ -1,6 +1,6 @@
 [package]
 name = "openapi-schema"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Rust structure mapped to Swagger"
 keywords = ["openapi","swagger","schema","OAS"]
