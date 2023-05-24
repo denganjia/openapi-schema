@@ -343,7 +343,7 @@ pub struct Operation {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub enum ParameInEnum {
+pub enum ParamInEnum {
     Query,
     Header,
     Path,
@@ -354,11 +354,11 @@ pub enum ParameInEnum {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(untagged)]
 pub enum ParameterOrRef {
-    Ref(Refrence),
+    Ref(Reference),
     Parameter(Parameter),
 }
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
-pub struct Refrence {
+pub struct Reference {
     #[serde(rename = "$ref")]
     reference: String,
 }
@@ -371,7 +371,7 @@ pub struct Parameter {
     /// The name of the parameter.
     pub name: String,
     /// The location of the parameter. Possible values are "query", "header", "path", "formData" or "body".
-    pub r#in: ParameInEnum,
+    pub r#in: ParamInEnum,
     /// A brief description of the parameter.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
@@ -671,7 +671,7 @@ mod test {
 
         assert_eq!(
             serde_json::from_str::<ParameterOrRef>(&json_str).unwrap(),
-            ParameterOrRef::Ref(Refrence {
+            ParameterOrRef::Ref(Reference {
                 reference: "/some/path".to_string()
             })
         )

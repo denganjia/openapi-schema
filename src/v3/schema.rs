@@ -557,7 +557,7 @@ pub struct Schema {
     #[serde(skip_serializing_if = "Option::is_none", rename = "uniqueItems")]
     pub unique_items: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub items: Option<Box<Schema>>,
+    pub items: Option<Box<RefOrObject<Schema>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub properties: Option<BTreeMap<String, Schema>>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "maxProperties")]
@@ -570,13 +570,13 @@ pub struct Schema {
     #[serde(rename = "type")]
     pub r#type: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "allOf")]
-    pub all_of: Option<Vec<Box<Schema>>>,
+    pub all_of: Option<Vec<Box<RefOrObject<Schema>>>>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "oneOf")]
-    pub one_of: Option<Vec<Box<Schema>>>,
+    pub one_of: Option<Vec<Box<RefOrObject<Schema>>>>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "anyOf")]
-    pub any_of: Option<Vec<Box<Schema>>>,
+    pub any_of: Option<Vec<Box<RefOrObject<Schema>>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub not: Option<Box<Schema>>,
+    pub not: Option<Box<RefOrObject<Schema>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
