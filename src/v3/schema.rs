@@ -559,7 +559,7 @@ pub struct Schema {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub items: Option<Box<RefOrObject<Schema>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub properties: Option<BTreeMap<String, Schema>>,
+    pub properties: Option<BTreeMap<String, RefOrObject<Schema>>>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "maxProperties")]
     pub max_properties: Option<Number>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "minProperties")]
