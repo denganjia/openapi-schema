@@ -1,13 +1,13 @@
 use serde::{Deserialize, Serialize};
 use std::{fs::File, io::Read, path::Path, result::Result};
 
-mod extension;
-mod v2;
-mod v3;
+pub mod extension;
+pub mod v2;
+pub mod v3;
 
 pub use extension::*;
-pub use v2::*;
-pub use v3::*;
+use v2::*;
+use v3::*;
 /// Supported versions of the OpenApi.
 #[derive(Debug, Deserialize, Serialize, PartialEq)]
 #[serde(untagged)]
@@ -46,9 +46,9 @@ where
 }
 
 /// deserialize an openapi from type which implements Read
-pub fn openapi_from_reader<R>(read: R) -> Result<v3::OpenApi, serde_json::Error>
+pub fn openapi_from_reader<R>(read: R) -> Result<OpenApi, serde_json::Error>
 where
     R: Read,
 {
-    serde_json::from_reader::<R, v3::OpenApi>(read)
+    serde_json::from_reader::<R, OpenApi>(read)
 }
