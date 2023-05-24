@@ -7,6 +7,27 @@ You can use this package will openapi document into rust structure
 ```bash
 cargo add openapi-schema
 ```
+```rust
+use openapi_schema::{from_path, Doc};
+
+fn main() {
+    let filepath = "./index.json";
+    let json = from_path(filepath);
+    match json {
+        Ok(some_doc) => match some_doc {
+            Doc::V2(swagger) => {
+                println!("swagger version:{}", swagger.swagger)
+            }
+            Doc::V3(openapi) => {
+                println!("openapi version:{}", openapi.openapi)
+            }
+        },
+        Err(e) => {
+            println!("{:?}", e)
+        }
+    }
+}
+```
 
 # Notice
 
