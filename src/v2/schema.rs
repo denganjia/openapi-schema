@@ -441,6 +441,9 @@ pub struct Schema {
     #[serde(rename = "$ref")]
     pub reference: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "originalRef")]
+    pub original_ref: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
