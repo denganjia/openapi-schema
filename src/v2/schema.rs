@@ -360,7 +360,7 @@ pub enum ParameterOrRef {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 pub struct Reference {
     #[serde(rename = "$ref")]
-    reference: String,
+    pub reference: String,
 }
 
 /// ### Parameter
