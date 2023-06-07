@@ -132,7 +132,7 @@ pub struct Components {
     pub schemas: Option<BTreeMap<String, RefOrObject<Schema>>>,
     /// An object to hold reusable Response Objects.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub responses: Option<BTreeMap<String, RefOrObject<Response>>>,
+    pub responses: Option<Responses>,
     /// An object to hold reusable Parameter Objects.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<BTreeMap<String, RefOrObject<Parameter>>>,

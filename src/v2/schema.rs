@@ -570,8 +570,8 @@ pub struct Items {
 
 /// ### Responses
 /// A container for the expected responses of an operation.
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
-pub struct Responses(BTreeMap<String, ResponseOrRef>);
+// #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+pub type Responses = BTreeMap<String, ResponseOrRef>;
 
 /// ### Response
 /// Describes a single response from an API Operation.
