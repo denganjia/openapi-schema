@@ -48,7 +48,7 @@ pub struct Swagger {
     pub responses: Option<BTreeMap<String, Response>>,
 
     /// Security scheme definitions that can be used across the specification.
-    #[serde(skip_serializing_if = "Option::is_none", rename = "SecurityScheme")]
+    #[serde(skip_serializing_if = "Option::is_none", rename = "securityDefinitions")]
     pub security_definitions: Option<BTreeMap<String, SecurityScheme>>,
 
     /// A declaration of which security schemes are applied for the API as a whole.
