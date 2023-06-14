@@ -48,7 +48,10 @@ pub struct Swagger {
     pub responses: Option<BTreeMap<String, Response>>,
 
     /// Security scheme definitions that can be used across the specification.
-    #[serde(skip_serializing_if = "Option::is_none", rename = "securityDefinitions")]
+    #[serde(
+        skip_serializing_if = "Option::is_none",
+        rename = "securityDefinitions"
+    )]
     pub security_definitions: Option<BTreeMap<String, SecurityScheme>>,
 
     /// A declaration of which security schemes are applied for the API as a whole.
@@ -487,6 +490,29 @@ pub struct Schema {
     // implies object
     #[serde(skip_serializing_if = "Option::is_none")]
     pub properties: Option<BTreeMap<String, Schema>>,
+
+    #[serde(
+        skip_serializing_if = "Option::is_none",
+        rename = "additionalProperties"
+    )]
+    pub additional_properties: Option<Value>,
+
+    /// Adds support for polymorphism.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub discriminator: Option<Discriminator>,
+
+    /// Relevant only for Schema "properties" definitions.
+    #[serde(skip_serializing_if = "Option::is_none", rename = "readOnly")]
+    pub read_only: Option<bool>,
+    /// This MAY be used only on properties schemas.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub xml: Option<XML>,
+    /// Additional external documentation for this schema.
+    #[serde(skip_serializing_if = "Option::is_none", rename = "externalDocs")]
+    pub external_docs: Option<ExternalDoc>,
+    /// A free-form property to include an example of an instance for this schema.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub example: Option<Value>,
     // composition
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "allOf")]
@@ -507,7 +533,26 @@ pub enum ParameterType {
     Array,
     File,
 }
-
+/// ### XML
+/// A metadata object that allows for more fine-tuned XML model definitions.
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+pub struct XML {
+    /// Replaces the name of the element/attribute used for the described schema property.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    /// The URI of the namespace definition.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub namespace: Option<String>,
+    /// The prefix to be used for the name.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub prefix: Option<String>,
+    /// Declares whether the property definition translates to an attribute instead of an element.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub attribute: Option<bool>,
+    /// MAY be used only for an array definition.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wrapped: Option<bool>,
+}
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(rename_all = "lowercase")]
 pub enum ItemsType {
@@ -660,6 +705,18 @@ pub enum ResponseOrRef {
         #[serde(rename = "$ref")]
         reference: String,
     },
+}
+
+/// ### Discriminator
+/// When request bodies or response payloads may be one of a number of different schemas, a discriminator object can be used to aid in serialization, deserialization, and validation.
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+pub struct Discriminator {
+    /// The name of the property in the payload that will hold the discriminator value.
+    #[serde(rename = "propertyName")]
+    pub property_name: String,
+    /// An object to hold mappings between payload values and schema names or references.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mapping: Option<BTreeMap<String, String>>,
 }
 
 #[cfg(test)]
