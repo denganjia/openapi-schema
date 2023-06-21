@@ -240,15 +240,16 @@ pub struct SecurityScheme {
     /// The location of the API key. Valid values are `"query"` or `"header"`.
     pub r#in: InEnum,
     /// The flow used by the OAuth2 security scheme. Valid values are `"implicit"`,`"password"`,`"application"` or `"accessCode"`.
-    pub flow: Flow,
+    pub flow: Option<Flow>,
     /// The authorization URL to be used for this flow. This SHOULD be in the form of a URL.
-    #[serde(rename = "authorizationUrl")]
-    pub authorization_url: AuthorizationUrl,
+    #[serde(rename = "authorizationUrl", skip_serializing_if = "Option::is_none")]
+    pub authorization_url: Option<AuthorizationUrl>,
     /// The token URL to be used for this flow. This SHOULD be in the form of a URL.
-    #[serde(rename = "tokenUrl")]
-    pub token_url: TokenUrl,
+    #[serde(rename = "tokenUrl", skip_serializing_if = "Option::is_none")]
+    pub token_url: Option<TokenUrl>,
     /// The available scopes for the OAuth2 security scheme.
-    pub scopes: BTreeMap<String, String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub scopes: Option<BTreeMap<String, String>>,
     /// Allows extensions to the Swagger Schema.
     #[serde(flatten)]
     pub extensions: Extensions,
